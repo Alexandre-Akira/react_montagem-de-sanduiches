@@ -1,70 +1,179 @@
-# Getting Started with Create React App
+# Projeto final: Montagem de sanduíches
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O nosso projeto final para a conclusão de curso será uma aplicação para montagem de sanduíches. Os objetivos são colocar uma aplicação de vida real para desenvolvimento de suas habilidades que possa utilizar o máximo dos conhecimentos que desenvolvemos em sala de aula.
 
-## Available Scripts
+## Regras de desenvolvimento
 
-In the project directory, you can run:
+O projeto deve ser desenvolvido utilizando somente ReactJs, React Router e PropTypes nenhuma outra biblioteca externa será permitida. É recomendado que tentem utilizar o máximo dos conteúdos que foram passados em aula.
 
-### `npm start`
+## Descrição do projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+O link com o guia visual e de estilos do projeto é o seguinte: https://www.figma.com/file/yfC52fwN1hEKpPFsHlryXS/Untitled?node-id=2%3A86
+A aplicação é uma plataforma para montagem de sanduíches com uma tela final de checkout.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Rota principal (Index)
 
-### `npm test`
+A tela inicial deve conter um cabeçalho com o título: "Monte seu sanduíche", o passo a passo para montagem do sanduíche e um resumo com tudo o que foi selecionado e o preço final
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Passo a passo:
 
-### `npm run build`
+O passo a passo vai conter uma imagem de um sanduíche, um subtítulo indicando o passo atual e as opções referentes a cada passo. Abaixo está a listagem de passos:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<table>
+	<tr>
+		<th>Nome do Passo</th>
+		<th>Item</th>
+		<th>Preço</th>
+	</tr>
+	<tr>
+		<td rowspan="4">Escolha seu pão</td>
+		<td>Brioche</td>
+		<td>R$5,00</td>
+	</tr>
+	<tr>
+		<td>Australiano</td>
+		<td>R$4,00</td>
+	</tr>
+	<tr>
+		<td>Gergelim</td>
+		<td>R$3,00</td>
+	</tr>
+	<tr>
+		<td>Sal</td>
+		<td>R$2,50</td>
+	</tr>
+	<tr>
+		<td rowspan="4">Escolha sua carne</td>
+		<td>Boi</td>
+		<td>R$8,00</td>
+	</tr>
+	<tr>
+		<td>Porco</td>
+		<td>R$6,00</td>
+	</tr>
+	<tr>
+		<td>Frango</td>
+		<td>R$4,00</td>
+	</tr>
+	<tr>
+		<td>Vegetariano</td>
+		<td>R$6,00</td>
+	</tr>
+	<tr>
+		<td rowspan="4">Escolha seu queijo</td>
+		<td>Molho Gorgonzola</td>
+		<td>R$8,00</td>
+	</tr>
+	<tr>
+		<td>Prato</td>
+		<td>R$6,00</td>
+	</tr>
+	<tr>
+		<td>Chedar</td>
+		<td>R$6,00</td>
+	</tr>
+	<tr>
+		<td>Sem queijo</td>
+		<td>R$0,00</td>
+	</tr>
+	<tr>
+		<td rowspan="4">
+			Escolha suas saladas<br />
+			Mais de uma opção selecionável
+		</td>
+		<td>Alface</td>
+		<td>R$1,00</td>
+	</tr>
+	<tr>
+		<td>Tomate</td>
+		<td>R$2,00</td>
+	</tr>
+	<tr>
+		<td>Cebola</td>
+		<td>R$2,00</td>
+	</tr>
+	<tr>
+		<td>Picles</td>
+		<td>R$4,00</td>
+	</tr>
+	<tr>
+		<td rowspan="4">
+			Escolha seus complementos<br />
+			Mais de uma opção selecionável
+		</td>
+		<td>Bacon</td>
+		<td>R$4,00</td>
+	</tr>
+	<tr>
+		<td>Cebola Caramelizada</td>
+		<td>R$2,00</td>
+	</tr>
+	<tr>
+		<td>Molho Especial</td>
+		<td>R$3,00</td>
+	</tr>
+	<tr>
+		<td>Pimenta Jalapeño</td>
+		<td>R$3,00</td>
+	</tr>
+</table>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Resumo do Pedido:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O resumo do pedido deve conter um título e as informações do que já foi selecionado. Assim que um ingrediente é selecionado no passo a passo ele deve aparecer no resumo e alterar o preço total. O botão de prosseguir só aparece habilitado quando no caso dos passos onde só há um item a ser selecionado um item tiver sido clicado, no outro cenário ele sempre aparece habilitado.
+O total deve exibir o preço total de todos os ingredientes selecionados até aquele momento somado. Ao final do último passo (Escolha seus complementos) o usuário deve ser redirecionado para a rota de checkout.
 
-### `npm run eject`
+### Rota de checkout
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+A tela referente a rota de checkout deve possuir um resumo do pedido, um formulário de pagamento, um cabeçalho com o título "Pague seu sanduíche" um modal de sucesso e um modal de fracasso.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Resumo do pedido:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+O resumo do pedido deve mostrar os ingredientes selecionados em cada passo de maneira semântica e o valor total.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Dados de pagamento:
 
-## Learn More
+O botão de pagar só deve ser habilitado caso o formulário de pagamento seja válido. Caso o botão seja clicado com o formulário válido ele vai mostrar o modal de sucesso.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Modal de Sucesso
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Deve apresentar o título **Pagamento Aprovado com Sucesso** e o texto: " _Muito obrigado pela compra, [nome do cliente], ela foi computada no cartão de final [xxx]. Esperamos que tenha um excelente lanche e que possamos vos atender mais vezes!_" além disso deve possuir um botão de Ok para fechar o modal.
 
-### Code Splitting
+#### Modal de Fracasso
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Deve apresentar o título **Pagamento Recusado** e o texto: " _Identificamos que você tentou inserir um número de cartão inválido para tentar nos enganar. Calote aqui não!_" além disso deve possuir um botão de Me Desculpe para fechar o modal.
 
-### Analyzing the Bundle Size
+#### Validação de formulário
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+O formulário deve possuir os seguintes campos: Nome, Número do Cartão, Data de Vencimento, CVV e CPF.
 
-### Making a Progressive Web App
+- O campo de nome deve conter somente letras.
+- O campo de cartão deve conter somente números e 12 dígitos
+- O campo de data de vencimento não pode ter uma data anterior a atual
+- O campo CVV deve conter 3 dígitos numéricos
+- O campo CPF deve conter 11 dígitos numéricos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Critérios de avaliação
 
-### Advanced Configuration
+Serão avaliados:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- O quão completa está a aplicação comparada a proposta
+- Utilização de estruturas aprendidas em sala de aula
+- Boas práticas de programação
+- Componentização de código
+- Reutilização de componentes genéricos
+- Proximidade com o template proposto
+- Documentação do projeto
+- Legibilidade do código
+- Manutenibilidade do código
 
-### Deployment
+**Não serão permitidos e tolerados (sujeito a perda de pontos, inclusive todos eles)**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Cópias
+- Bibliotecas externas não listadas ou previamente combinadas
+- Inserção de conteúdo desrespeitoso ou ofensivo na aplicação
+- Edição do projeto após a entrega
 
-### `npm run build` fails to minify
+## Entrega do Projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A entrega deve ser realizada no class a partir de um link para um repositório público com o projeto realizado. A data final para recebimento do trabalho será 25/03/2022, projetos entregues após esta data serão desconsiderados e zerados.

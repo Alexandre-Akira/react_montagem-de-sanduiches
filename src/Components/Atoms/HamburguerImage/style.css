@@ -1,0 +1,8 @@
+.hamburguer-image {
+  width: 27.2rem;
+  height: 23.8rem;
+}
+
+.hamburguer-image > img {
+  object-fit: cover;
+}

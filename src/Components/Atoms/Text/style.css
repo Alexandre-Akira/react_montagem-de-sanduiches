@@ -1,0 +1,10 @@
+.text {
+  display: block;
+}
+
+.text--acknowledgement {
+  color: #8e0000;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 2.813rem;
+}

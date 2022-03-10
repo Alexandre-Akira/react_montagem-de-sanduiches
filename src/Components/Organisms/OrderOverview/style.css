@@ -1,0 +1,17 @@
+.order-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.order-overview__image {
+  margin-bottom: 1.6rem;
+}
+
+.order-overview__text,
+.order-overview__title {
+  margin-bottom: 2.4rem;
+}
+
+.order-overview__title {
+  align-self: right;
+}

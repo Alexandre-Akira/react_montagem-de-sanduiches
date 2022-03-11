@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
 .title--app {
   font-weight: 600;
   font-size: 4rem;
@@ -9,5 +11,21 @@
   font-weight: 600;
   font-size: 2.4rem;
   line-height: 2.813rem;
+  color: #000000;
+}
+
+.title--payment-form {
+  font-size: 2.4rem;
+  font-family: "Lobster";
+  font-weight: 400;
+  line-height: 3rem;
+  color: #000000;
+}
+
+.title--selected-items {
+  font-size: 2.4rem;
+  font-family: "Lobster";
+  font-weight: 400;
+  line-height: 3rem;
   color: #000000;
 }

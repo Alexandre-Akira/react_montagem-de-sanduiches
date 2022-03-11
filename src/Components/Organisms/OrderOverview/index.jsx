@@ -1,8 +1,8 @@
 import "./style.css";
-import Title from "../../Atoms/Title";
 import ItemList from "../../Molecules/ItemList";
 import HamburguerImage from "../../Atoms/HamburguerImage";
 import Text from "../../Atoms/Text";
+import Title from "../../Atoms/Title";
 
 function OrderOverview() {
   const selectedItems = [
@@ -16,6 +16,7 @@ function OrderOverview() {
     <div className="order-overview">
       <HamburguerImage className="order-overview__image" />
       <Text className="order-overview__text text--acknowledgement">Obrigado pela Preferencia</Text>
+      <Title className="order-overview__list-title title--overview">Resumo do Pedido:</Title>
       <ItemList className="order-overview__list" items={selectedItems} />
     </div>
   );

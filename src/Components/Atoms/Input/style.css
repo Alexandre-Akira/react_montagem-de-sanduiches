@@ -1,0 +1,15 @@
+.input-wrapper__label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.875rem;
+}
+
+.input-wrapper__input {
+  border: 0.1rem solid #000000;
+  border-radius: 0.4rem;
+  height: 3.5rem;
+  width: 100%;
+  padding-left: 1.6rem;
+}

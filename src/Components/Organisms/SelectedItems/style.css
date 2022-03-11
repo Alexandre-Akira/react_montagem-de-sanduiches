@@ -1,0 +1,23 @@
+.selected-items__title {
+  margin-bottom: 1.6rem;
+}
+
+.selected-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 56rem;
+  width: 48rem;
+  border-radius: 4px;
+  background: #ffc107;
+  padding: 2.4rem 2.4rem 3.8rem;
+}
+
+.selected-items__footer {
+  align-self: center;
+  text-align: center;
+}
+
+.selected-items__total {
+  margin-bottom: 2.4rem;
+}

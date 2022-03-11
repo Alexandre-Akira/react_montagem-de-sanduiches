@@ -1,0 +1,10 @@
+.button {
+  width: 32rem;
+  height: 5.1rem;
+  border-radius: 4rem;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 1.9rem;
+  color: #ffffff80;
+  background: rgba(198, 40, 40, 0.5);
+}

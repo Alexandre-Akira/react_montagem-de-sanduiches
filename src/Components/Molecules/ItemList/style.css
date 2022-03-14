@@ -1,1 +1,8 @@
+.item-list__title {
+  margin-bottom: 1.6rem;
+}
 
+.item-list__item {
+  font-size: 1.6rem;
+  line-height: 1.875rem;
+}

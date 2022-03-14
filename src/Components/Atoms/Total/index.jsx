@@ -8,7 +8,7 @@ function Total({ items, className }) {
   let total = 0;
   items.forEach((item) => (total += item.value));
 
-  return <>{items.length > 0 && <p className={`${className} total`}>Total: {formatNumber(total)}</p>}</>;
+  return <>{items.length > 0 && <p className={`${className}`}>Total: {formatNumber(total)}</p>}</>;
 }
 
 export default Total;

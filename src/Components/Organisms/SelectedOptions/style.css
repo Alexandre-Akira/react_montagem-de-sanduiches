@@ -1,8 +1,4 @@
-.selected-items__title {
-  margin-bottom: 1.6rem;
-}
-
-.selected-items {
+.selected-options {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,13 +7,17 @@
   border-radius: 4px;
   background: #ffc107;
   padding: 2.4rem 2.4rem 3.8rem;
+  margin: 0 auto;
 }
 
-.selected-items__footer {
+.selected-options__title {
+  margin-bottom: 1.6rem;
+}
+.selected-options__footer {
   align-self: center;
   text-align: center;
 }
 
-.selected-items__total {
+.selected-options__total {
   margin-bottom: 2.4rem;
 }

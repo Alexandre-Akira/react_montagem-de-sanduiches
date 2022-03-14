@@ -1,0 +1,13 @@
+.select-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-options__image {
+  align-self: center;
+}
+
+.select-options__text {
+  align-self: center;
+  margin: 1.6rem 0 2.4rem;
+}

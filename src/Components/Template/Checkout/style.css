@@ -1,6 +1,6 @@
 .checkout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  margin-top: 4rem;
+  grid-template-columns: 53% 47%;
+  gap: 4rem;
+  padding: 4rem 4rem;
 }

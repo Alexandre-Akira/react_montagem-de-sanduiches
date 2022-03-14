@@ -1,13 +1,16 @@
 import "./style.css";
 import { Component } from "react";
 import Item from "../../Atoms/Item";
+import Total from "../../Atoms/Total";
+import Title from "../../Atoms/Title";
 
 class ItemList extends Component {
   render() {
-    const { items } = this.props;
+    const { items, className } = this.props;
 
     return (
-      <div className="item-list">
+      <div className={`${className} item-list`}>
+        <Title className="item-list__title title--overview">Resumo do Pedido:</Title>
         <ul className="item-list__wrapper">
           {items.map((item, index) => {
             return (
@@ -19,6 +22,7 @@ class ItemList extends Component {
               />
             );
           })}
+          <Total className="item-list__item" items={items} />
         </ul>
       </div>
     );

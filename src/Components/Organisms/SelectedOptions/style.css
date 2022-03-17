@@ -10,14 +10,18 @@
   margin: 0 auto;
 }
 
+.selected-options__button {
+  width: 100%;
+}
+
 .selected-options__title {
   margin-bottom: 1.6rem;
 }
 .selected-options__footer {
-  align-self: center;
   text-align: center;
 }
 
 .selected-options__total {
   margin-bottom: 2.4rem;
+  align-self: center;
 }

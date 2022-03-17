@@ -1,3 +1,7 @@
+.input-wrapper {
+  position: relative;
+}
+
 .input-wrapper__label {
   display: block;
   margin-bottom: 0.8rem;
@@ -12,4 +16,10 @@
   height: 3.5rem;
   width: 100%;
   padding-left: 1.6rem;
+}
+
+.input-wrapper__error-message {
+  position: absolute;
+  color: #c62828;
+  font-size: 1.1rem;
 }

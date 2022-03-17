@@ -1,18 +1,14 @@
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Component } from "react";
 
-function Button({ to = null, children, type, className, onOptionClick, id, state }) {
-  if (to === null) {
+class Button extends Component {
+  render() {
+    const { children, type, className, onClick, id } = this.props;
+
     return (
-      <button id={id} onClick={onOptionClick} className={`${className} button`} type={type}>
+      <button id={id} onClick={onClick} className={`${className} button`} type={type}>
         {children}
       </button>
-    );
-  } else {
-    return (
-      <Link state={state} to={to} className={`${className} button`} type={type}>
-        {children}
-      </Link>
     );
   }
 }

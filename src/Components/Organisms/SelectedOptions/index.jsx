@@ -4,7 +4,7 @@ import Title from "../../Atoms/Title";
 import Button from "../../Atoms/Button";
 import Total from "../../Atoms/Total";
 
-function SelectedOptions({ options }) {
+function SelectedOptions({ options, onNextClick }) {
   return (
     <div className="selected-options">
       <div className="selected-options__list">
@@ -13,7 +13,7 @@ function SelectedOptions({ options }) {
       </div>
       <div className="selected-options__footer">
         <Total className="selected-options__total" items={options} />
-        <Button to={"/checkout"} state={options} className="selected-options__button">
+        <Button state={options} onClick={onNextClick} className="selected-options__button">
           Prosseguir
         </Button>
       </div>

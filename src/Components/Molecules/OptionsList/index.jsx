@@ -7,7 +7,7 @@ function OptionsList({ options, onOptionClick }) {
       {options.map((option, index) => {
         return (
           <li className="options-list__option" key={`${index}option`}>
-            <Button id={option.id} onOptionClick={onOptionClick} className="options-list__button" type="button">
+            <Button id={option.id} onClick={onOptionClick} className="options-list__button" type="button">
               {option.description}
             </Button>
           </li>

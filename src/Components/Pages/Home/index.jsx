@@ -2,67 +2,125 @@ import "../../Template/Home/style.css";
 import options from "../../../db.js";
 import SelectedOptions from "../../Organisms/SelectedOptions";
 import SelectOptions from "../../Organisms/SelectOptions";
-import { useState } from "react";
+import { Component } from "react";
+import AppHeader from "../../Molecules/AppHeader";
+import { Redirect } from "react-router-dom";
 
-function Home() {
-  const [currentOptions, setCurrentOptions] = useState([
-    { id: 1, category: "Pão", description: "Australiano", value: 4 },
-    { id: 2, category: "Pão", description: "Brioche", value: 5 },
-    { id: 3, category: "Pão", description: "Gergelim", value: 3 },
-    { id: 4, category: "Pão", description: "Sal", value: 2.5 },
-  ]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [position, setPosition] = useState(1);
-  let text;
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentOptions: [
+        { id: 1, category: "Pão", description: ["Australiano"], value: 4 },
+        { id: 2, category: "Pão", description: ["Brioche"], value: 5 },
+        { id: 3, category: "Pão", description: ["Gergelim"], value: 3 },
+        { id: 4, category: "Pão", description: ["Sal"], value: 2.5 },
+      ],
+      selectedOptions: [],
+      redirect: false,
+    };
+    this.teste = [];
+    this.text = "";
+    this.position = 0;
 
-  function updateMessage() {
-    switch (currentOptions[0].category) {
+    this.updateMessage = this.updateMessage.bind(this);
+    this.searchOptionByID = this.searchOptionByID.bind(this);
+    this.handleOptionClick = this.handleOptionClick.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
+    this.mergeCategoryOptions = this.mergeCategoryOptions.bind(this);
+  }
+
+  updateMessage() {
+    switch (this.state.currentOptions[0].category) {
       case "Pão":
-        text = "Escolha o seu pão";
+        this.text = "Escolha o seu pão";
         break;
       case "Carne":
-        text = "Escolha a sua carne";
+        this.text = "Escolha a sua carne";
         break;
       case "Queijo":
-        text = "Escolha o seu queijo";
+        this.text = "Escolha o seu queijo";
         break;
       case "Saladas":
-        text = "Escolha a sua salada";
+        this.text = "Escolha a sua salada";
         break;
       case "Complementos":
-        text = "Escolha o seu complemento";
+        this.text = "Escolha o seu complemento";
         break;
     }
-    return text;
+    return this.text;
   }
-
-  function searchOptionByID(id) {
+  searchOptionByID(id) {
     const isSameID = (option) => {
-      return option.id == id;
+      let optionCopy = JSON.parse(JSON.stringify(option));
+      return optionCopy.id == id;
     };
-    let option = currentOptions.find(isSameID);
-    return option;
+    let option = JSON.parse(JSON.stringify(this.state.currentOptions));
+    return option.find(isSameID);
   }
 
-  function handleOptionClick(e) {
+  handleOptionClick(e) {
     const optionID = e.target.id;
-    let option = searchOptionByID(optionID);
+    let option = this.searchOptionByID(optionID);
+
     const selectedOption = {
       category: option.category,
       description: option.description,
       value: option.value,
     };
-    setSelectedOptions([...selectedOptions, selectedOption]);
-    setCurrentOptions(options[position]);
-    if (position < currentOptions.length) setPosition(position + 1);
+    this.teste = [...this.teste, selectedOption];
+    this.setState({ selectedOptions: this.mergeCategoryOptions(this.teste) });
   }
 
-  return (
-    <main className="home">
-      <SelectOptions text={updateMessage()} onOptionClick={handleOptionClick} options={currentOptions} />
-      <SelectedOptions options={selectedOptions} />
-    </main>
-  );
+  handleNextClick() {
+    this.position += 1;
+    if (this.position < options.length) {
+      this.setState({ currentOptions: options[this.position] });
+    } else {
+      this.setState({ redirect: true });
+    }
+  }
+
+  mergeCategoryOptions(categoryOptions = []) {
+    const options = JSON.parse(JSON.stringify(categoryOptions));
+
+    const mergedOptions = options.reduce((result, currentOption) => {
+      let category = currentOption.category;
+      let repeatedOption = result.find((option) => option.category === category);
+
+      if (repeatedOption) {
+        repeatedOption.value += currentOption.value;
+        repeatedOption.description = [...repeatedOption.description, ...currentOption.description];
+      } else result.push(currentOption);
+
+      return result;
+    }, []);
+    return mergedOptions;
+  }
+
+  render() {
+    return (
+      <>
+        <AppHeader title={"Monte Seu Sanduiche"} />
+        <main className="home">
+          <SelectOptions
+            text={this.updateMessage()}
+            onOptionClick={this.handleOptionClick}
+            options={this.state.currentOptions}
+          />
+          <SelectedOptions onNextClick={this.handleNextClick} options={this.state.selectedOptions} />
+          {this.state.redirect === true && (
+            <Redirect
+              to={{
+                pathname: "/checkout",
+                state: this.state.selectedOptions,
+              }}
+            />
+          )}
+        </main>
+      </>
+    );
+  }
 }
 
 export default Home;

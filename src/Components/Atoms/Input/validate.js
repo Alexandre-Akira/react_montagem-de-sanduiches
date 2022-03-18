@@ -35,6 +35,10 @@ class Validate {
 
     let month = convertedValue[0];
     let year = convertedValue[1];
+
+    if (value === "") {
+      errorMessage.push("Insira uma data");
+    }
     let day = new Date(`20${year}`, month, 0).getDate();
 
     let expireDate = new Date(`20${year}/${month}/${day}`);

@@ -6,38 +6,31 @@ class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
       errorMessage: "",
     };
-    this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.teste = "name";
   }
 
-  handleOnChange($event) {
-    this.setState({ value: $event.target.value });
-  }
-
   handleOnBlur() {
-    const { validationMethod } = this.props;
+    const { validationMethod, value } = this.props;
 
-    this.setState({ errorMessage: Validate[validationMethod](this.state.value).join(" ") });
+    this.setState({ errorMessage: Validate[validationMethod](value).join(" ") });
   }
 
   render() {
-    const { value } = this.state;
-    const { className, placeholder, label } = this.props;
+    const { className, placeholder, label, value, onChange, index } = this.props;
     return (
       <div className={`${className} input-wrapper`}>
         <label className="input-wrapper__label" htmlFor={`${label}Form`}>
           {label}
         </label>
         <input
-          id={`${label}Form`}
+          data-index-number={index}
           placeholder={placeholder}
           className={`input-wrapper__input`}
           value={value}
-          onChange={($event) => this.handleOnChange($event)}
+          onChange={onChange}
           onBlur={this.handleOnBlur}
         />
         <p className="input-wrapper__error-message">{this.state.errorMessage}</p>

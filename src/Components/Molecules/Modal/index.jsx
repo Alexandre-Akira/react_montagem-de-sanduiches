@@ -16,7 +16,7 @@ class Modal extends Component {
     };
 
     this.failureTemplate = {
-      title: "Pagamento não foi aprovado",
+      title: "Dados Incorretos",
       message() {
         return `Por favor, revise os dados e refaça a compra`;
       },
@@ -24,15 +24,21 @@ class Modal extends Component {
   }
 
   render() {
-    const { userData, hide, onClick } = this.props;
+    const { userData, hide, onClick, numberOfInputsWithError } = this.props;
     let last4cardNumber = userData[1].value.split("").slice(-4).join("");
     let userName = userData[0].value;
     return (
       <div className={hide === true ? " modal modal--hidden" : "modal"}>
         <div className="modal__wrapper">
           <div className="modal__content">
-            <Title className="modal__title title--modal">{this.successTemplate.title}</Title>
-            <Text className="modal__message">{this.successTemplate.message(userName, last4cardNumber)}</Text>
+            <Title className="modal__title title--modal">
+              {numberOfInputsWithError > 0 ? this.failureTemplate.title : this.successTemplate.title}
+            </Title>
+            <Text className="modal__message">
+              {numberOfInputsWithError > 0
+                ? this.failureTemplate.message()
+                : this.successTemplate.message(userName, last4cardNumber)}
+            </Text>
           </div>
           <Button onClick={onClick} className="modal__button">
             Ok

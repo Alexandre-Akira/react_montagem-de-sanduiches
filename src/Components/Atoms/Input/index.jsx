@@ -1,25 +1,15 @@
 import { Component } from "react";
-import Validate from "./validate";
+
 import "./style.css";
 
 class Input extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      errorMessage: "",
-    };
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-    this.teste = "name";
-  }
-
-  handleOnBlur() {
-    const { validationMethod, value } = this.props;
-
-    this.setState({ errorMessage: Validate[validationMethod](value).join(" ") });
   }
 
   render() {
-    const { className, placeholder, label, value, onChange, index } = this.props;
+    const { validationMethod, className, placeholder, label, value, onChange, onBlur, index, errorMessage } =
+      this.props;
     return (
       <div className={`${className} input-wrapper`}>
         <label className="input-wrapper__label" htmlFor={`${label}Form`}>
@@ -30,10 +20,10 @@ class Input extends Component {
           placeholder={placeholder}
           className={`input-wrapper__input`}
           value={value}
-          onChange={onChange}
-          onBlur={this.handleOnBlur}
+          onChange={($event) => onChange($event, validationMethod)}
+          onBlur={($event) => onBlur($event, validationMethod)}
         />
-        <p className="input-wrapper__error-message">{this.state.errorMessage}</p>
+        <p className="input-wrapper__error-message">{errorMessage}</p>
       </div>
     );
   }

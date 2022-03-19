@@ -85,7 +85,7 @@ class PaymentForm extends Component {
           </form>
         </div>
 
-        <Modal onClick={this.handleModalClick} hide={this.state.hide} />
+        <Modal userData={this.state.formInputsAtributtes} onClick={this.handleModalClick} hide={this.state.hide} />
       </>
     );
   }

@@ -7,16 +7,32 @@ import Button from "../../../Components/Atoms/Button";
 class Modal extends Component {
   constructor(props) {
     super(props);
+
+    this.successTemplate = {
+      title: "Pagamento Aprovado com Sucesso",
+      message(userName, userCardNumber) {
+        return `Muito obrigado pela compra, ${userName}, ela foi computada no cartão de final ${userCardNumber}. Esperamos que tenha um excelente lanche e que possamos vos atender mais vezes!`;
+      },
+    };
+
+    this.failureTemplate = {
+      title: "Pagamento não foi aprovado",
+      message() {
+        return `Por favor, revise os dados e refaça a compra`;
+      },
+    };
   }
 
   render() {
-    const { title, message, hide, onClick } = this.props;
+    const { userData, hide, onClick } = this.props;
+    let last4cardNumber = userData[1].value.split("").slice(-4).join("");
+    let userName = userData[0].value;
     return (
       <div className={hide === true ? " modal modal--hidden" : "modal"}>
         <div className="modal__wrapper">
           <div className="modal__content">
-            <Title className="modal__title title--modal">{title}</Title>
-            <Text className="modal__message">{message}</Text>
+            <Title className="modal__title title--modal">{this.successTemplate.title}</Title>
+            <Text className="modal__message">{this.successTemplate.message(userName, last4cardNumber)}</Text>
           </div>
           <Button onClick={onClick} className="modal__button">
             Ok

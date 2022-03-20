@@ -1,8 +1,3 @@
-.options-list__button {
-  background: #c62828;
-  color: white;
-}
-
 .options-list__option:not(:last-child) {
   margin-bottom: 1.6rem;
 }

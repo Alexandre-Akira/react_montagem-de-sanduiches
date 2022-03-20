@@ -13,7 +13,7 @@ function SelectedOptions({ options, onNextClick }) {
       </div>
       <div className="selected-options__footer">
         <Total className="selected-options__total" items={options} />
-        <Button state={options} onClick={onNextClick} className="selected-options__button">
+        <Button state={options} onClick={onNextClick} className="selected-options__button button--selectedOptions">
           Prosseguir
         </Button>
       </div>

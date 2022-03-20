@@ -133,7 +133,7 @@ class PaymentForm extends Component {
                 );
               })}
             </div>
-            <Button onClick={this.handleSubmitClick} type="submit" className="form__button button--form">
+            <Button onClick={this.handleSubmitClick} type="submit" className="form__button button--payment">
               Pagar
             </Button>
           </form>

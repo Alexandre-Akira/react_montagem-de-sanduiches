@@ -6,7 +6,7 @@ class Button extends Component {
     const { children, type, className, onClick, id } = this.props;
 
     return (
-      <button id={id} onClick={onClick} className={`${className} button`} type={type}>
+      <button id={id} onClick={onClick} className={` button  ${className}`} type={type}>
         {children}
       </button>
     );

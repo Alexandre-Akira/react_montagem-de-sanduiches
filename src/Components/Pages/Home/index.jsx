@@ -19,7 +19,7 @@ class Home extends Component {
       selectedOptions: [],
       redirect: false,
     };
-    this.teste = [];
+    this.selectedOptions = [];
     this.text = "";
     this.position = 0;
 
@@ -68,8 +68,8 @@ class Home extends Component {
       description: option.description,
       value: option.value,
     };
-    this.teste = [...this.teste, selectedOption];
-    this.setState({ selectedOptions: this.mergeCategoryOptions(this.teste) });
+    this.selectedOptions = [...this.selectedOptions, selectedOption];
+    this.setState({ selectedOptions: this.mergeCategoryOptions(this.selectedOptions) });
   }
 
   handleNextClick() {

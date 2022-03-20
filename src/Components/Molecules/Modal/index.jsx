@@ -40,7 +40,7 @@ class Modal extends Component {
                 : this.successTemplate.message(userName, last4cardNumber)}
             </Text>
           </div>
-          <Button onClick={onClick} className="modal__button">
+          <Button onClick={onClick} className="modal__button button--option">
             Ok
           </Button>
         </div>

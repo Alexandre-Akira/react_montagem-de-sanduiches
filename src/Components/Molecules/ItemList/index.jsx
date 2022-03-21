@@ -1,7 +1,6 @@
 import "./style.css";
 import { Component } from "react";
 import Item from "../../Atoms/Item";
-import Total from "../../Atoms/Total";
 import Title from "../../Atoms/Title";
 
 class ItemList extends Component {
@@ -22,7 +21,6 @@ class ItemList extends Component {
               />
             );
           })}
-          <Total className="item-list__item" items={items} />
         </ul>
       </div>
     );

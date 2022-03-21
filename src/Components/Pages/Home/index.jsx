@@ -60,19 +60,37 @@ class Home extends Component {
   }
 
   handleOptionClick(e) {
+    const optionElement = e.target;
     const optionID = e.target.id;
     let option = this.searchOptionByID(optionID);
+    optionElement.classList.toggle("button--selected");
+    let removedOption = false;
 
     const selectedOption = {
       category: option.category,
       description: option.description,
       value: option.value,
     };
-    this.selectedOptions = [...this.selectedOptions, selectedOption];
+
+    this.selectedOptions.forEach((element, index) => {
+      if (selectedOption.description.toString() == element.description.toString()) {
+        this.selectedOptions.splice(index, 1);
+        removedOption = true;
+      }
+    });
+    if (!removedOption) {
+      this.selectedOptions = [...this.selectedOptions, selectedOption];
+    }
+
     this.setState({ selectedOptions: this.mergeCategoryOptions(this.selectedOptions) });
+    console.log(this.state.selectedOptions);
   }
 
   handleNextClick() {
+    const selectedOptionsElements = document.querySelectorAll(".button--selected");
+    selectedOptionsElements.forEach((selectedOption) => {
+      selectedOption.classList.remove("button--selected");
+    });
     this.position += 1;
     if (this.position < options.length) {
       this.setState({ currentOptions: options[this.position] });
@@ -86,11 +104,11 @@ class Home extends Component {
 
     const mergedOptions = options.reduce((result, currentOption) => {
       let category = currentOption.category;
-      let repeatedOption = result.find((option) => option.category === category);
+      let optionWithSameCategory = result.find((option) => option.category === category);
 
-      if (repeatedOption) {
-        repeatedOption.value += currentOption.value;
-        repeatedOption.description = [...repeatedOption.description, ...currentOption.description];
+      if (optionWithSameCategory) {
+        optionWithSameCategory.value += currentOption.value;
+        optionWithSameCategory.description = [...optionWithSameCategory.description, ...currentOption.description];
       } else result.push(currentOption);
 
       return result;

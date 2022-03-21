@@ -16,15 +16,15 @@ class Modal extends Component {
     };
 
     this.failureTemplate = {
-      title: "Dados Incorretos",
+      title: "Pagamento Recusado",
       message() {
-        return `Por favor, revise os dados e refaça a compra`;
+        return `Identificamos que você tentou inserir um número de cartão inválido para tentar nos enganar. Calote aqui não!`;
       },
     };
   }
 
   render() {
-    const { userData, hide, onClick, numberOfInputsWithError } = this.props;
+    const { userData, hide, onClick, invalidCard } = this.props;
     let last4cardNumber = userData[1].value.split("").slice(-4).join("");
     let userName = userData[0].value;
     return (
@@ -32,16 +32,16 @@ class Modal extends Component {
         <div className="modal__wrapper">
           <div className="modal__content">
             <Title className="modal__title title--modal">
-              {numberOfInputsWithError > 0 ? this.failureTemplate.title : this.successTemplate.title}
+              {invalidCard === true ? this.failureTemplate.title : this.successTemplate.title}
             </Title>
             <Text className="modal__message">
-              {numberOfInputsWithError > 0
+              {invalidCard === true
                 ? this.failureTemplate.message()
                 : this.successTemplate.message(userName, last4cardNumber)}
             </Text>
           </div>
           <Button onClick={onClick} className="modal__button button--option">
-            Ok
+            {invalidCard === true ? "Me Desculpe" : "Ok"}
           </Button>
         </div>
       </div>

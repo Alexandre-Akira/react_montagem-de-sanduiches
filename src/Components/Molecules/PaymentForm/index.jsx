@@ -9,7 +9,7 @@ import { Component } from "react";
 class PaymentForm extends Component {
   constructor(props) {
     super(props);
-
+    this.isDisabled = true;
     this.state = {
       formInputsAtributtes: [
         {
@@ -65,9 +65,10 @@ class PaymentForm extends Component {
     this.handleInputBlur = this.handleInputBlur.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
-    this.checkInputsWithError = this.checkInputsWithError.bind(this);
+    this.invalidCardNumber = this.invalidCardNumber.bind(this);
   }
   handleInputChange($event, validationMethod) {
+    let errors = 0;
     let inputIndex = $event.target.dataset.indexNumber;
     let value = $event.target.value;
     this.setState((prevState) => ({
@@ -80,6 +81,7 @@ class PaymentForm extends Component {
   }
 
   handleInputBlur($event, validationMethod) {
+    let errors = 0;
     let inputIndex = $event.target.dataset.indexNumber;
     let value = $event.target.value;
     this.setState((prevState) => ({
@@ -87,6 +89,13 @@ class PaymentForm extends Component {
         obj.id === inputIndex ? Object.assign(obj, { errorMessage: Validate[validationMethod](value).join(" ") }) : obj
       ),
     }));
+    this.state.formInputsAtributtes.forEach((formInputAttribute) => {
+      if (formInputAttribute.errorMessage != "" || formInputAttribute.value === "") {
+        errors++;
+      }
+    });
+
+    errors > 0 ? (this.isDisabled = true) : (this.isDisabled = false);
   }
 
   handleSubmitClick($event) {
@@ -98,15 +107,14 @@ class PaymentForm extends Component {
     this.setState({ hide: true });
   }
 
-  checkInputsWithError() {
-    let numberOfInvalidInputs = 0;
-    this.state.formInputsAtributtes.forEach((inputAtt) => {
-      if (inputAtt.errorMessage != "" || inputAtt.value === "") {
-        numberOfInvalidInputs++;
-      }
-    });
-
-    return numberOfInvalidInputs;
+  invalidCardNumber() {
+    let invalidCardNumber = false;
+    const cardNumberInput = this.state.formInputsAtributtes.find((element) => element.validate === "cardNumber");
+    if (cardNumberInput.value === "111111111111") {
+      invalidCardNumber = true;
+    }
+    console.log(invalidCardNumber);
+    return invalidCardNumber;
   }
 
   render() {
@@ -133,14 +141,19 @@ class PaymentForm extends Component {
                 );
               })}
             </div>
-            <Button onClick={this.handleSubmitClick} type="submit" className="form__button button--payment">
+            <Button
+              disabled={this.isDisabled}
+              onClick={this.handleSubmitClick}
+              type="submit"
+              className="form__button button--payment"
+            >
               Pagar
             </Button>
           </form>
         </div>
 
         <Modal
-          numberOfInputsWithError={this.checkInputsWithError()}
+          invalidCard={this.invalidCardNumber()}
           userData={this.state.formInputsAtributtes}
           onClick={this.handleModalClick}
           hide={this.state.hide}

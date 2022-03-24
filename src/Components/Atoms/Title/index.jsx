@@ -1,7 +1,10 @@
 import "./style.css";
 
-function Title({ className, children }) {
-  return <h1 className={`${className} `}>{children}</h1>;
-}
+import React, { Component } from "react";
 
-export default Title;
+export default class Title extends Component {
+  render() {
+    const { children, ...props } = this.props;
+    return <h1 {...props}>{children}</h1>;
+  }
+}

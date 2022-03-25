@@ -1,11 +1,10 @@
 import "../../Template/Home/style.css";
-import options from "../../../db.js";
-import SelectedOptions from "../../Organisms/SelectedOptions";
-import Menu from "../../Organisms/Menu";
 import { Component } from "react";
 import AppHeader from "../../Molecules/AppHeader";
+import Menu from "../../Organisms/Menu";
+import SelectedOptions from "../../Organisms/SelectedOptions";
 import { Redirect } from "react-router-dom";
-import { toHaveDisplayValue } from "@testing-library/jest-dom/dist/matchers";
+import options from "../../../db.js";
 
 class Home extends Component {
   constructor(props) {
@@ -13,8 +12,9 @@ class Home extends Component {
     this.state = {
       currentOptions: options[0],
       selectedOptions: [],
+      redirect: false,
     };
-
+    this.position = 0;
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
     this.checkIfExist = this.checkIfExist.bind(this);
@@ -33,16 +33,24 @@ class Home extends Component {
     const { selectedOptions } = this.state;
     const copySelectedOptions = selectedOptions.slice();
     const index = copySelectedOptions.indexOf(selectedOption);
+    selectedOptions[index].selected = false;
     copySelectedOptions.splice(index, 1);
     this.setState({ selectedOptions: copySelectedOptions });
   }
 
   async removeOthersByCategory(selectedOption) {
-    const copySelectedOptions = this.state.selectedOptions.slice();
-    const optionsToBeRemoved = copySelectedOptions.filter((option) => option.category === selectedOption.category);
-    optionsToBeRemoved.forEach((option) => {
-      this.remove(option);
-    });
+    if (
+      selectedOption.category != "Queijo" &&
+      selectedOption.category != "Complementos" &&
+      selectedOption.category != "Saladas"
+    ) {
+      const copySelectedOptions = this.state.selectedOptions.slice();
+      const optionsToBeRemoved = copySelectedOptions.filter((option) => option.category === selectedOption.category);
+      optionsToBeRemoved.forEach((option) => {
+        option.selected = false;
+        this.remove(option);
+      });
+    }
   }
 
   checkIfExist(selectedOption) {
@@ -58,26 +66,32 @@ class Home extends Component {
       this.remove(selectedOption);
     } else {
       this.removeOthersByCategory(selectedOption).then(() => {
+        selectedOption.selected = true;
         this.add(selectedOption);
       });
     }
   }
 
   handleNextClick() {
-    console.log("teste");
+    this.position += 1;
+    if (this.position < options.length) {
+      this.setState({ currentOptions: options[this.position] });
+    } else {
+      this.setState({ redirect: true });
+    }
   }
 
   render() {
     const { state, handleOptionClick, handleNextClick } = this;
-    const { selectedOptions, currentOptions } = state;
+    const { selectedOptions, currentOptions, redirect } = state;
     return (
       <>
         <AppHeader />
         <main className="home">
           <Menu options={currentOptions} text="Teste" onOptionClick={handleOptionClick} />
-
           <SelectedOptions onNextClick={handleNextClick} options={selectedOptions} />
         </main>
+        {redirect && <Redirect to="Checkout" />}
       </>
     );
   }

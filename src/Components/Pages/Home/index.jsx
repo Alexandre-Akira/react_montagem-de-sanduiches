@@ -21,6 +21,7 @@ class Home extends Component {
     this.removeOthersByCategory = this.removeOthersByCategory.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
+    this.mergeOptionsByCategory = this.mergeOptionsByCategory.bind(this);
   }
 
   //Methods
@@ -39,16 +40,15 @@ class Home extends Component {
   }
 
   async removeOthersByCategory(selectedOption) {
-    if (
-      selectedOption.category != "Queijo" &&
-      selectedOption.category != "Complementos" &&
-      selectedOption.category != "Saladas"
-    ) {
-      const copySelectedOptions = this.state.selectedOptions.slice();
+    const { selectedOptions } = this.state;
+    if (selectedOption.category != "Complementos" && selectedOption.category != "Saladas") {
+      const copySelectedOptions = selectedOptions.slice();
       const optionsToBeRemoved = copySelectedOptions.filter((option) => option.category === selectedOption.category);
       optionsToBeRemoved.forEach((option) => {
+        const index = copySelectedOptions.indexOf(option);
         option.selected = false;
-        this.remove(option);
+        copySelectedOptions.splice(index, 1);
+        this.setState({ selectedOptions: copySelectedOptions });
       });
     }
   }
@@ -57,6 +57,25 @@ class Home extends Component {
     const copySelectedOptions = this.state.selectedOptions.slice();
     const thisOptionExist = copySelectedOptions.includes(selectedOption);
     return thisOptionExist;
+  }
+
+  mergeOptionsByCategory(selectedOptions = []) {
+    // const SelectedOptions = selectedOptions.slice() -- Copia o state mas mantem a referencia;
+
+    const SelectedOptions = JSON.parse(JSON.stringify(selectedOptions.slice()));
+
+    const mergedSelectedOptions = SelectedOptions.reduce((result, currentOption) => {
+      let category = currentOption.category;
+      let optionWithSameCategory = result.find((option) => option.category === category);
+
+      if (optionWithSameCategory) {
+        optionWithSameCategory.value += currentOption.value;
+        optionWithSameCategory.description = [...optionWithSameCategory.description, ...currentOption.description];
+      } else result.push(currentOption);
+
+      return result;
+    }, []);
+    return mergedSelectedOptions;
   }
 
   //Events
@@ -82,16 +101,16 @@ class Home extends Component {
   }
 
   render() {
-    const { state, handleOptionClick, handleNextClick } = this;
+    const { state, handleOptionClick, handleNextClick, mergeOptionsByCategory } = this;
     const { selectedOptions, currentOptions, redirect } = state;
     return (
       <>
         <AppHeader />
         <main className="home">
           <Menu options={currentOptions} text="Teste" onOptionClick={handleOptionClick} />
-          <SelectedOptions onNextClick={handleNextClick} options={selectedOptions} />
+          <SelectedOptions onNextClick={handleNextClick} options={mergeOptionsByCategory(selectedOptions)} />
         </main>
-        {redirect && <Redirect to="Checkout" />}
+        {redirect && <Redirect to={{ pathname: "Checkout", state: selectedOptions }} />}
       </>
     );
   }

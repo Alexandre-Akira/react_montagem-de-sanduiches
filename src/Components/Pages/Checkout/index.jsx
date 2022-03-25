@@ -7,14 +7,14 @@ import "../../Template/Checkout/style.css";
 class Checkout extends Component {
   constructor(props) {
     super(props);
-    this.items = this.props.location.state;
   }
   render() {
+    const selectedOptions = this.props.location.state;
     return (
       <>
         <AppHeader title={"Pague Seu Sanduiche"} />
         <main className="checkout">
-          <OrderOverview selectedItems={this.items} />
+          <OrderOverview selectedItems={selectedOptions} />
           <PaymentForm />
         </main>
       </>

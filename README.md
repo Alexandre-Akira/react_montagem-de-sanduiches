@@ -1,3 +1,27 @@
+# Lets Code - Montagem de Sanduíches
+
+Esta é uma solução desenvolvida para um challenge da [Lets Code](https://www.letscode.com.br/).
+
+## Indice
+
+- [Visão Geral](#Visão-Geral)
+  - [O Desafio](#O-Desafio)
+  - [Manual do Usuario](#Manual-do-usuario)
+- [Processo de desenvolvimento](#Processo-de-desenvolvimento)
+  - [Tecnologias](#Tecnologias)
+  - [Metodologias](#Metodologias)
+  - [O que eu aprendi](#O-que-eu-aprendi)
+  - [Implementacoes futuras](#Implementacoes-futuras)
+  - [Recursos uteis](#Recursos-uteis)
+- [Autor](#Autor)
+- [Agradecimentos](#Agradecimentos)
+
+## Visão Geral
+
+Este APP consiste em duas paginas, sendo a primeira a home que contem um menu oferecendo os items que compoem um sanduiche em formato de opções selecionaveis, conforme o usuario seleciona estas opções elas seram listadas no resumo do pedido. Ja a segunda pagina trata-se de um checkout que ira conter os itens selecionados e um form para enviar os dados do pagamento.
+
+### O Desafio
+
 # Projeto final: Montagem de sanduíches
 
 O nosso projeto final para a conclusão de curso será uma aplicação para montagem de sanduíches. Os objetivos são colocar uma aplicação de vida real para desenvolvimento de suas habilidades que possa utilizar o máximo dos conhecimentos que desenvolvemos em sala de aula.
@@ -177,3 +201,69 @@ Serão avaliados:
 ## Entrega do Projeto
 
 A entrega deve ser realizada no class a partir de um link para um repositório público com o projeto realizado. A data final para recebimento do trabalho será 25/03/2022, projetos entregues após esta data serão desconsiderados e zerados.
+
+### Manual do usuario
+
+1. Para selecionar um item que irá compor o sanduiche desejado o usuario deve clicar em cima da opção desejada.
+2. Para retirar o item selecionado o usuario deve clicar novamente sobre o item selecionado.
+3. Para avançar nas etapas da construção do lanche o usuario deve clicar no botão prosseguir, caso o usuario não selecione nada, aquela opção é ignorada e o item não sera computado.
+4. Na pagina de checkout o usuario deve preencher corretamente todos os dados de pagamento e só apos concluir o preenchimento o mesmo podera clicar no botão pagar. Caso contrario o botão permanecerá desativado.
+
+## Processo de desenvolvimento
+
+Para esta solução optei por estruturar o codigo seguindo o atom design pattern, afim de separar adequadamente cada componente com foco em manutenabilidade e escalabilidade. Abaixo detalharei a estrutura:
+
+- Pastas
+
+1. Assets: Essa pasta contem todas as imagens do projeto.
+2. Atoms: Contem todos os componentes em seu estado atomico, ou seja, não é possivel fragmenta-los em componentes menores.
+3. Molecules: Contem componentes que possuem um conjunto de atomos.
+4. Organisms: Contem componentes mais complexos que possuem conjuntos de atomos e moleculas.
+5. Pages: Contem as paginas da aplicação definidas no arquivo routes
+6. Template: Contem a estilização apenas referente a estrutura das paginas. Isto é, não contem nenhuma propriedade de css que não seja referente a posicionamento de elementos na pagina.
+
+- Arquivos:
+
+1. db.js: Este arquivo contem todas as opções descritas no desafio.
+2. routes.js: Este arquivo contem o mapeamento das rotas das paginas.
+
+### Tecnologias
+
+- HTML 5
+- CSS
+- Javascript
+- React.JS
+
+### Metodologias
+
+- Atomic design pattern
+- Block Element Modifier (BEM)
+
+### O que eu aprendi
+
+- Manipular classes no react
+- Deep copy e shallow copy
+- Transformar de functional components para class components
+- Utilizar states
+
+### Implementacoes futuras
+
+- O usuario não deve poder avançar sem ter escolhido ao menos um item das opções
+- Implementar um layout responsivo
+- Refatorar os componentes que não estão tão genericos como deveriam ser.
+
+### Recursos uteis
+
+- (http://getbem.com/naming/) - Me ajudou a estruturar meu css, tentei aplicar da melhor forma possivel o Block Element Modifier
+- (https://developer.mozilla.org/pt-BR/docs/Web/API/https://andela.com/insights/structuring-your-react-application-atomic-design-principles/) - Esta documentacao me ajudou a entender o o atomic design pattern
+- (https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy) - Esta documentação me ajudou a entender a diferença entre deep copy e shallow copy.
+
+## Autor
+
+- Github - [Alexandre-Akira](https://github.com/Alexandre-Akira)
+- Frontend Mentor - [@Alexandre-Akira](https://www.frontendmentor.io/profile/Alexandre-Akira)
+- Linkedin - [AlexandreAkira](https://www.linkedin.com/in/alexandreakira/)
+
+## Agradecimentos
+
+Gostaria de agradecer o professor da Lets Code [João Paulo](https://github.com/UXJPMN) que me ajudou a exclarecer inumeros conceitos de classes dentro do React, e a propria [Lets Code](https://www.letscode.com.br/) por proporcionar essas experiencias.

@@ -1,10 +1,10 @@
 import "./style.css";
 import Title from "../../Atoms/Title";
 
-function AppHeader() {
+function AppHeader({ title }) {
   return (
     <header className="app-header">
-      <Title className="title--app">Monte Seu Sanduíche</Title>
+      <Title className="title--app">{title}</Title>
     </header>
   );
 }

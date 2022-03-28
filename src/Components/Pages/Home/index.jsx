@@ -22,6 +22,7 @@ class Home extends Component {
     this.handleOptionClick = this.handleOptionClick.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.mergeOptionsByCategory = this.mergeOptionsByCategory.bind(this);
+    this.updateOptionsTitle = this.updateOptionsTitle.bind(this);
   }
 
   //Methods
@@ -100,14 +101,37 @@ class Home extends Component {
     }
   }
 
+  updateOptionsTitle(currentOptions) {
+    const category = currentOptions[0].category;
+    let title = "";
+    switch (category) {
+      case "Pão":
+        title = `Escolha seu ${category.toLowerCase()}`;
+        break;
+      case "Carne":
+        title = `Escolha sua ${category.toLowerCase()}`;
+        break;
+      case "Queijo":
+        title = `Escolha seu ${category.toLowerCase()}`;
+        break;
+      case "Saladas":
+        title = `Escolha as suas ${category.toLowerCase()}`;
+        break;
+      case "Complementos":
+        title = `Escolha os seus ${category.toLowerCase()}`;
+        break;
+    }
+    return title;
+  }
+
   render() {
-    const { state, handleOptionClick, handleNextClick, mergeOptionsByCategory } = this;
+    const { state, handleOptionClick, handleNextClick, mergeOptionsByCategory, updateOptionsTitle } = this;
     const { selectedOptions, currentOptions, redirect } = state;
     return (
       <>
-        <AppHeader />
+        <AppHeader title="Monte Seu Sanduíche" />
         <main className="home">
-          <Menu options={currentOptions} text="Teste" onOptionClick={handleOptionClick} />
+          <Menu options={currentOptions} text={updateOptionsTitle(currentOptions)} onOptionClick={handleOptionClick} />
           <SelectedOptions onNextClick={handleNextClick} options={mergeOptionsByCategory(selectedOptions)} />
         </main>
         {redirect && <Redirect to={{ pathname: "Checkout", state: selectedOptions }} />}

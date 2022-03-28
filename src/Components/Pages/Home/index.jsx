@@ -28,7 +28,7 @@ class Home extends Component {
   //Methods
   add(selectedOption) {
     const { selectedOptions } = this.state;
-    this.setState({ selectedOptions: [selectedOption, ...selectedOptions] });
+    this.setState({ selectedOptions: [...selectedOptions, selectedOption] });
   }
 
   remove(selectedOption) {
